@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>     
+<html>
+<head>
+    <title>TEST</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="pragma" content="no-cache"><!-- ページキャッシュを無効（HTTP/1.0） -->
+    <meta http-equiv="cache-control" content="no-cache"><!-- ページキャッシュを無効（HTTP/1.1） -->
+    <meta http-equiv="expires" content="0"><!-- ページの有効期限 -->
+    <!--<meta name="viewport" content="width=device-width,initial-scale = 1.0,maximum-scale=1.0;user-scalable=0;user-scalable=no">--><!--拡大縮小させない-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"><!--拡大縮小は許可する-->
+    <meta name="apple-mobile-web-app-capable" content="yes"><!-- iOSでウェブアプリとして表示 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=10"/>
+    <style type="text/css">
+    <!--
+        body {
+            margin: 0;
+            -webkit-text-size-adjust: 100%;/*縦向き (Portrate mode) と横向き (Landscape mode) の文字サイズを自動調整*/
+        }
+    -->
+    </style>
+</head>
+<body>
+
+
+
+    <script type="text/javascript">
+    <!--
+        (function () {
+
+            //----------------------------------------------------------
+            // === イコール3つは「厳密等価演算子」
+            // ==  イコール2つは「等価演算子」
+            //----------------------------------------------------------
+            if (0 == 0) {
+                var a = 1;
+                var b = '1';
+                console.log('==', (a == b));   //true
+                console.log('===', (a === b)); //false
+
+                // !== 厳密不等価演算子
+                console.log('!=', (a != b));   //false
+                console.log('!==', (a !== b)); //true
+            }
+
+
+            //----------------------------------------------------------
+            // + '' で文字列化
+            //----------------------------------------------------------
+            if (0 == 1) {
+                var v = 123;
+                console.log(v + '');
+
+                //以下は、パフォーマンス悪い
+                console.log(v.toString());
+                console.log(String(v));
+            }
+
+
+            //----------------------------------------------------------
+            // + で数値化
+            //----------------------------------------------------------
+            if (0 == 1) {
+                var s = '123';
+                console.log(+s);
+
+                //以下は、パフォーマンス悪い
+                console.log(s - 0);
+                console.log(Number(s));
+                console.log(parseFloat(s));
+                console.log(parseInt(s));
+                console.log(eval(s));
+
+                //文字列などで数値化出来ない場合はNaNになる
+                console.log(+'a'); //NaN
+
+                //空文字の場合 + と -0 と Number は 0 になるが、parseFloatはNaNになる
+                console.log('+:',+'');        //0
+                console.log('-0:', '' - 0);     //0
+                console.log('Number:', Number('')); //0
+                console.log('parseFloat:', parseFloat('')); //NaN
+                console.log('parseInt:', parseInt(''));   //NaN
+                console.log('eval:', eval('')); //undefined
+            }
+
+
+            //----------------------------------------------------------
+            // 三項演算子
+            //----------------------------------------------------------
+            if (0 == 1) {
+
+                // (式) ? true : false ;
+                (1 == 1) ? console.log(true) : console.log(false);
+                if (1 == 1) { console.log(true) } else { console.log(false) }
+
+                //式なので、他の式と繋げて文になる事も出来る。
+                console.log((1 == 1) ? true : false);
+                //if文は式ではないので、他の式と繋げられない
+                //console.log(if (1 == 1) { console.log(true) } else { console.log(false) })
+
+                var x = true;
+                console.log('A:',(x) ? true : false);
+                x = false;
+                console.log('B:', (x) ? true : false);
+
+
+                //練習
+                var n = 1;
+                var flg = (n>0) ? true : false;
+                console.log(flg);
+
+                if (n>0) {
+                    flg = true;
+                } else {
+                    flg = false;
+                }
+                console.log(flg);
+
+                // (式) ? true;
+                // だけの形にはできない。
+                // && か || を使えばできる
+
+            }
+
+            //実用
+            if (0 == 1) {
+
+                var k = getRandomInt(0, 100);
+                function getRandomInt(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+
+                (k === 100) ?
+                    console.log(k + '点！') :
+                (k >= 80) ?
+                    console.log(k + '点かぁ。') :
+                (k >= 60) ?
+                    console.log(k + '点か。') :
+                (k >= 40) ?
+                    console.log(k + '点ですか。') :
+                (k >= 20) ?
+                    console.log(k + '点なの。') :
+                console.log(k + '点だと…');
+
+            }
+
+            //----------------------------------------------------------
+            // && と || でif文の省略
+            //----------------------------------------------------------
+            if (0 == 1) {
+
+                var z = true;
+                (z) && console.log('z:',true); //true のときに通す
+                !(z) || console.log('z:', false); //falseのときに通す
+
+                console.log('z2:', (z) && true);
+                console.log('z2:', !(z) || false);
+
+                //------------------------------------------------------
+
+                var x = {};
+
+                x.a = true;
+                (x.a) && console.log('a:', '&&'); //true のときに通す
+                (x.a) || console.log('a:', '||'); 
+
+                x.b = false;
+                (x.b) && console.log('b:', '&&');
+                (x.b) || console.log('b:', '||'); //falseのときに通す
+
+                //ifであれば
+                if (x.a) console.log('a2:', '&&');
+                if (!x.a) { } else { console.log('a2:', '||') }
+
+                //------------------------------------------------------
+
+                var n = 1;
+                (n > 0) && console.log('c', '&&');
+                (n < 0) || console.log('c', '||');
+
+            }
+
+            // && の応用
+            if (0 == 1) {
+
+                var x = '';
+                (1 == 1) && (1 == 1) && (x = 'a');
+                (1 == 1) && (0 == 1) && (x = 'b');
+                console.log(x);//a
+
+                //------------------------------------------------------
+
+                var o = { f: function () { console.log("hello"); } };
+
+                o && o.f && o.f();
+
+                //↑の意味
+                if (o) {
+                    if (o.f) {
+                        o.f()
+                    }
+                };
+
+            }
+
+            //数値や文字列、オブジェクトが内部で暗黙にbooleanに変換されるのを利用している。
+            //数値の0やNaN、空文字列、null、undefinedがfalseに変換される。
+            //予期せぬ自動変換を避けるためにも null や undefined のチェックに留めておくのが良い
+
+            // &&や||を使うとif文を使うよりスマートフォンにおいては昔は速くなる傾向があったが、
+            // 今ではほとんど差がなくなっているので、可読性を犠牲にしてまで使うイディオムではない。
+
+
+            // || の実用例
+            function f(o) {
+                o = o || {};//o が undefined であったときに初期化する
+
+            }
+
+            // +数字化と || の実用例
+            if (0 == 1) {
+                // vの数値化に失敗した場合に、NaNではなくてゼロにする。
+                // vがゼロだった場合もゼロになるので安心。
+
+                var v = '';
+                var n = +v || 0;
+                console.log('v:', n); //0
+
+                v = NaN;
+                n = +v || 0;
+                console.log('NaN:', n); //0
+
+                v = null;
+                n = +v || 0;
+                console.log('null:', n); //0
+
+                v = undefined;
+                n = +v || 0;
+                console.log('undefined:', n); //0
+
+                v = '0';
+                n = +v || 0;
+                console.log('0:', n); //0
+
+                v = '1';
+                n = +v || 0;
+                console.log('1:', n); //1
+            }
+
+            //応用例 switch の代替
+            if (0 == 1) {
+
+                var x = 'c';
+
+                // 普通にswitch
+                var rtn = 'default';
+                switch (x) {
+                    case 'a':
+                        rtn = 'aaa';
+                        break;
+                    case 'b':
+                        rtn = 'bbb';
+                        break;
+                    case 'c':
+                        rtn = 'ccc';
+                    //    break;
+                    //default:
+                    //    rtn = 'default';
+                }
+                console.log('rtn:', rtn);
+
+                // && と || を使う
+                var rtn2 = (x == 'a') && 'aaa'
+                        || (x == 'b') && 'bbb'
+                        || (x == 'c') && 'ccc'
+                        || 'default';
+                console.log('rtn2:', rtn2);
+
+                // 三項演算子を使う
+                var rtn3 = (x == 'a') ? 'aaa' :
+                           (x == 'b') ? 'bbb' :
+                           (x == 'c') ? 'ccc' :
+                           'default';
+                console.log('rtn3:', rtn3);
+
+                //三項演算子を使うと一番短く書ける
+
+            }
+
+
+            //【参考】
+            // http://nmi.jp/archives/488
+
+
+
+            //----------------------------------------------------------
+            // evalの正しい使い方
+            //----------------------------------------------------------
+            if (0 == 1) {
+
+                function ab() {
+                    console.log('ab!');
+                }
+
+                var name1 = 'a';
+                var name2 = 'b';
+                eval(name1 + name2 + "();");
+
+            }
+
+
+
+
+            //----------------------------------------------------------
+            function onLoad() {
+
+            }
+            window.addEventListener("load", onLoad, false);
+
+        })();
+
+    //-->
+    </script>
+</body>
+</html>
